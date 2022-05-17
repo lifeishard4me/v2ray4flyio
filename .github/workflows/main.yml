@@ -7,13 +7,12 @@ on:
         type: environment
         required: true 
   push:
-  schedule:
-    - cron: '0 4 1 * *'
 
 jobs:
   deploy:
     name: Deploy app
     runs-on: ubuntu-latest
+    ENVIRONMENT: ${{ github.event.inputs.environment }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -24,4 +23,4 @@ jobs:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
           APP_NAME: ${{ secrets.APP_NAME }}
           UUID: ${{ secrets.UUID }}
-          ENVIRONMENT: ${{ github.event.inputs.environment }}
+
